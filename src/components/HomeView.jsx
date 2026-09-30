@@ -72,12 +72,21 @@ export default function HomeView() {
         }
       },
       (error) => {
-        console.warn('GPS error, falling back to central hub:', error);
+        let msg = 'Location set to Central Emergency Hub.';
+        if (error.code === error.PERMISSION_DENIED) {
+           msg = 'GPS Permission Denied. Using Central Hub.';
+        } else if (error.code === error.POSITION_UNAVAILABLE) {
+           msg = 'GPS Position Unavailable. Using Central Hub.';
+        } else if (error.code === error.TIMEOUT) {
+           msg = 'GPS Request Timed Out. Using Central Hub.';
+        }
+        console.warn('GPS error, falling back to central hub:', error.message);
+        
         // Fallback to central hub
         updateLocation(12.9716, 77.5946, 'MG Road Metro Station, Bengaluru (Central Hub)');
         setDetectingGps(false);
-        setGpsSuccessMsg('Location set to Central Emergency Hub.');
-        setTimeout(() => setGpsSuccessMsg(''), 3000);
+        setGpsSuccessMsg(msg);
+        setTimeout(() => setGpsSuccessMsg(''), 5000);
       },
       {
         enableHighAccuracy: true,

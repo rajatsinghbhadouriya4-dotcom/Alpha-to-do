@@ -307,14 +307,20 @@ export function AppProvider({ children }) {
 
     setActiveEmergencySummary(summary);
 
-    // Save to Supabase emergency_requests
+    // Save to Supabase emergency_requests only if hospital_id is a valid UUID
+    const isUUID = (str) => /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);
+    
     try {
-      await saveEmergencyRequest({
-        user_id: user?.id || null,
-        emergency_type: summary.emergencyType,
-        hospital_id: hosp.id || null,
-        status: 'Completed',
-      });
+      if (hosp.id && isUUID(hosp.id)) {
+        await saveEmergencyRequest({
+          user_id: user?.id || null,
+          emergency_type: summary.emergencyType,
+          hospital_id: hosp.id,
+          status: 'Completed',
+        });
+      } else {
+        console.info('DEMO DATA MODE: Skipping database save for non-UUID hospital:', hosp.id);
+      }
     } catch (e) {
       console.warn('Could not save emergency request to DB:', e);
     }

@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 
-const SUPABASE_URL = 'https://qkrswbisbchznjgvzrwm.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFrcnN3YmlzYmNoem5qZ3Z6cndtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUyOTgzNTAsImV4cCI6MjEwMDg3NDM1MH0.n798itOmhCSOwh87NnoOq4U-WA7A-WOyE8rO30kwhq0';
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://qkrswbisbchznjgvzrwm.supabase.co';
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFrcnN3YmlzYmNoem5qZ3Z6cndtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUyOTgzNTAsImV4cCI6MjEwMDg3NDM1MH0.n798itOmhCSOwh87NnoOq4U-WA7A-WOyE8rO30kwhq0';
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   auth: {
@@ -339,7 +339,14 @@ export async function saveEmergencyRequest(requestData) {
     if (error) throw error;
     return data;
   } catch (err) {
-    console.error('saveEmergencyRequest error:', err);
+    console.error('saveEmergencyRequest error:', {
+      message: err.message,
+      code: err.code,
+      details: err.details,
+      hint: err.hint,
+      status: err.status,
+      operation: 'insert emergency_requests'
+    });
     throw err;
   }
 }

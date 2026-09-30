@@ -182,34 +182,9 @@ export const adminAPI = {
   },
 };
 
-export const callsAPI = {
-  createCall: async (receiverId, callType = 'audio') => {
-    return apiFetch('/calls', {
-      method: 'POST',
-      body: JSON.stringify({ receiver_id: receiverId, call_type: callType }),
-    });
-  },
-  getCallById: async (id) => {
-    return apiFetch(`/calls/${id}`);
-  },
-  acceptCall: async (id) => {
-    return apiFetch(`/calls/${id}/accept`, { method: 'PATCH' });
-  },
-  rejectCall: async (id) => {
-    return apiFetch(`/calls/${id}/reject`, { method: 'PATCH' });
-  },
-  endCall: async (id) => {
-    return apiFetch(`/calls/${id}/end`, { method: 'PATCH' });
-  },
-  getUserCalls: async (userId) => {
-    return apiFetch(`/calls/user/${userId}`);
-  },
-};
-
 export default {
   authAPI,
   adminAPI,
-  callsAPI,
   getStoredToken,
   getStoredUser,
   setStoredSession,
