@@ -7,9 +7,16 @@
 const PROD_API = 'https://alpha-to-do.onrender.com/api';
 const DEV_API = 'http://localhost:5000/api';
 
+let envApiUrl = import.meta.env.VITE_API_URL;
+// If the user accidentally set VITE_API_URL to localhost in Vercel, ignore it in production!
+if (import.meta.env.PROD && envApiUrl && (envApiUrl.includes('localhost') || envApiUrl.includes('127.0.0.1'))) {
+  console.warn('Invalid production API URL (localhost detected). Falling back to Render.');
+  envApiUrl = null;
+}
+
 const API_BASE_URL = import.meta.env.PROD
-  ? (import.meta.env.VITE_API_URL || PROD_API)
-  : (import.meta.env.VITE_API_URL || DEV_API);
+  ? (envApiUrl || PROD_API)
+  : (envApiUrl || DEV_API);
 
 /**
  * Helper to get authorization token
