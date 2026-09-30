@@ -259,8 +259,8 @@ Please confirm directly with the hospital upon departure.
               </div>
             </div>
             <a
-              href={`tel:${data.hospitalPhone}`}
-              className="no-print rounded-xl bg-purple-700 text-white font-bold px-3 py-1.5 text-xs hover:bg-purple-800"
+              href="tel:112"
+              className="no-print rounded-xl bg-purple-700 text-white font-bold px-3 py-1.5 text-xs hover:bg-purple-800 transition-colors cursor-pointer"
             >
               Call Consultant
             </a>

@@ -12,6 +12,15 @@ import { authenticateUser, authorizeAdmin } from '../middleware/authMiddleware.j
 
 const router = express.Router();
 
+// Base route for /api/admin
+router.get('/', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'Admin API is running',
+    endpoints: ['GET /stats', 'GET /users', 'GET /users/:id', 'PUT /users/:id', 'PATCH /users/:id/status', 'PATCH /users/:id/role', 'DELETE /users/:id']
+  });
+});
+
 // Apply authentication and admin authorization to ALL admin endpoints
 router.use(authenticateUser);
 router.use(authorizeAdmin);

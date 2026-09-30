@@ -174,7 +174,7 @@ export default function HospitalDetailsView() {
             {/* Quick Actions */}
             <div className="flex flex-wrap items-center gap-2 shrink-0">
               <a
-                href={`tel:${h.emergency_phone || h.phone}`}
+                href="tel:112"
                 className="flex items-center gap-1.5 rounded-xl bg-red-600 px-4 py-2.5 text-xs font-bold text-white hover:bg-red-700 shadow-lg shadow-red-600/30 transition-all"
               >
                 <Phone className="h-3.5 w-3.5" />

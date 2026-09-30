@@ -98,7 +98,7 @@ export default function AmbulanceView() {
 
             <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
               <a
-                href={`tel:${amb.phone || '+919876511223'}`}
+                href="tel:112"
                 className="flex items-center gap-1.5 rounded-xl border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50"
               >
                 <Phone className="h-3.5 w-3.5" />

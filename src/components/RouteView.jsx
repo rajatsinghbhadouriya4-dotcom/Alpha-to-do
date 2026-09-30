@@ -154,7 +154,7 @@ export default function RouteView() {
 
             <div className="flex flex-wrap items-center gap-2">
               <a
-                href={`tel:${h.emergency_phone || h.phone}`}
+                href="tel:112"
                 className="flex items-center gap-1.5 rounded-xl bg-red-600 px-4 py-2 text-xs font-bold text-white hover:bg-red-700 shadow-md"
               >
                 <Phone className="h-3.5 w-3.5" />

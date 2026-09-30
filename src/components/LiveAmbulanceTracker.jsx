@@ -238,7 +238,7 @@ export default function LiveAmbulanceTracker() {
 
             <div className="flex flex-wrap items-center gap-2">
               <a
-                href={`tel:${amb.phone || '+919876511223'}`}
+                href="tel:112"
                 className="flex items-center gap-1.5 rounded-xl bg-emerald-600 px-4 py-2.5 text-xs font-bold text-white hover:bg-emerald-700 shadow-md"
               >
                 <Phone className="h-3.5 w-3.5" />

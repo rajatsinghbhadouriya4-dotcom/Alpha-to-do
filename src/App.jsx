@@ -13,6 +13,8 @@ import EmergencySummaryReceipt from './components/EmergencySummaryReceipt';
 import EmergencyHistoryView from './components/EmergencyHistoryView';
 import ProfileView from './components/ProfileView';
 import AdminView from './components/AdminView';
+import ConsultantMeetingView from './components/ConsultantMeetingView';
+import CallView from './components/CallView';
 import SignInPage from './components/auth/SignInPage';
 import SignUpPage from './components/auth/SignUpPage';
 import UserDashboard from './components/UserDashboard';
@@ -57,6 +59,10 @@ function PageRouter() {
       return <ProfileView />;
     case 'admin':
       return <AdminView />;
+    case 'consultant':
+      return <ConsultantMeetingView />;
+    case 'call':
+      return <CallView />;
     default:
       return <HomeView />;
   }
