@@ -2,7 +2,14 @@
  * Frontend API client communicating with Node.js + Express backend
  */
 
-const API_BASE_URL = 'https://alpha-to-do.onrender.com/api';
+// Use separate development and production environment configuration.
+// Do not hardcode localhost in production.
+const PROD_API = 'https://alpha-to-do.onrender.com/api';
+const DEV_API = 'http://localhost:5000/api';
+
+const API_BASE_URL = import.meta.env.PROD
+  ? (import.meta.env.VITE_API_URL || PROD_API)
+  : (import.meta.env.VITE_API_URL || DEV_API);
 
 /**
  * Helper to get authorization token
@@ -66,10 +73,16 @@ async function request(endpoint, options = {}) {
     headers['Authorization'] = `Bearer ${token}`;
   }
 
-  const response = await fetch(url, {
-    ...options,
-    headers,
-  });
+  let response;
+  try {
+    response = await fetch(url, {
+      ...options,
+      headers,
+    });
+  } catch (networkError) {
+    // This catches "Failed to fetch" (e.g. CORS, backend down, or hitting localhost from mobile)
+    throw new Error(`Network Error: Cannot connect to API at ${API_BASE_URL}. Please ensure your internet connection is active and the backend is running.`);
+  }
 
   const data = await response.json().catch(() => ({}));
 
